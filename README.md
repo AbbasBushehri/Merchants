@@ -17,4 +17,4 @@ Examples of the 4 modes:
 1) glob is V
 2) glob glob Silver is 34 Credits
 3) How much is glob glob?
-4) How many is glob glob Silver?
+4) How many Credits is glob glob Silver?
