@@ -25,7 +25,7 @@ public class RomanNumerals {
                 result += numbersMap.get(ch) - 2*numbersMap.get(roman.charAt(i-1));
             }
 
-            // Case 2: Current character is >= to previous character, or this is single digit roman numeral
+            // Case 2: Current character is >= to previous character (ex: VI) or is single numeral (ex: V)
             // In this case just add the corresponding number to result.
             else
                 result += numbersMap.get(ch);
