@@ -36,6 +36,10 @@ public class Main {
             else if(words[length-1].equals("Credits") && words[length-3].equals("is")){//Mode 2, update credit map
                 updateCreditMap(words, length);
             }
+            else if(words[length-1].equals("?") && words[0].equals("how") && words[1].equals("much")){//Mode 3
+                String [] romanArray = Arrays.copyOfRange(words, 3, length-1);
+                System.out.println(RomanNumerals.romanToInteger(romanArray));
+            }
             else { //error
                 System.out.println(failure);
             }
@@ -49,11 +53,7 @@ public class Main {
         //First part of string should be variables representing roman numerals
         //So I get an array of just these roman variables
         String[] romanArray = Arrays.copyOfRange(words, 0, length-4);
-        String roman = "";
-        for(int i = 0; i <romanArray.length; i++){
-            roman += romanMap.get(romanArray[i]); //converting the roman variables to their values (ex: glob->V)
-        }
-        int romanInt = RomanNumerals.romanToInteger(roman); //convert the roman numerals to integer
+        int romanInt = RomanNumerals.romanToInteger(romanArray); //convert the roman numeral variables to integer
         int value = creditVal / romanInt; //get the value of the credit variable
         creditMap.put(key, value); //finally update map
     }

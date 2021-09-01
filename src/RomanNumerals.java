@@ -2,7 +2,8 @@
 import java.util.*;
 
 public class RomanNumerals {
-    public static int romanToInteger(String roman){
+    //converts an array of roman numeral variables to an integer value
+    public static int romanToInteger(String[] array){
         Map<Character,Integer> numbersMap = new HashMap<>();
         numbersMap.put('I',1);
         numbersMap.put('V',5);
@@ -11,9 +12,13 @@ public class RomanNumerals {
         numbersMap.put('C',100);
         numbersMap.put('D',500);
         numbersMap.put('M',1000);
+        String roman = "";
+
+        for(int i = 0; i <array.length; i++){
+            roman += Main.romanMap.get(array[i]); //converting the roman variables to their values (ex: glob->V)
+        }
 
         int result=0;
-
         for(int i=0;i<roman.length();i++)
         {
             char ch = roman.charAt(i);      // Current Roman Character
@@ -33,4 +38,5 @@ public class RomanNumerals {
 
         return result;
     }
+
 }
