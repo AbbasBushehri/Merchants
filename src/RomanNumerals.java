@@ -15,7 +15,7 @@ public class RomanNumerals {
         String roman = "";
 
         for(int i = 0; i <array.length; i++){
-            roman += Main.romanMap.get(array[i]); //converting the roman variables to their values (ex: glob->V)
+            roman += Merchant.romanMap.get(array[i]); //converting the roman variables to their values (ex: glob->V)
         }
 
         int result=0;
