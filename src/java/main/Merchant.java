@@ -1,5 +1,8 @@
+package main;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.io.InputStream;
-import java.io.PrintStream;
 import java.util.*;
 
 public class Merchant {
@@ -7,18 +10,21 @@ public class Merchant {
     static final List<String> numeralsList = Arrays.asList(numeralsArray);
     static final HashMap<String, String> romanMap = new HashMap<>(); //variables that represent roman numerals
     static final HashMap<String, Double> creditMap = new HashMap<>();//variables that represent credit values
-    static final String failure = "I have no idea what you are talking about"; //error message
+    static final String ERROR = "I have no idea what you are talking about"; //error message
 
-    static private Scanner scanner;
-    static private PrintStream printStream;
+     private Scanner scanner;
+     private Logger logger;
 
-    public Merchant(InputStream inputStream, PrintStream printStream){
-        scanner = new Scanner(inputStream);
-        Merchant.printStream = printStream;
+    public Merchant(InputStream inputStream, Logger logger){
+        this.scanner = new Scanner(inputStream);
+        this.logger = logger;
     }
 
+
     public static void main(String[] args){
-        Merchant merchant = new Merchant(System.in, System.out);
+        Logger logger = LoggerFactory.getLogger(Merchant.class);
+        Merchant merchant = new Merchant(System.in, logger);
+
         merchant.merchantConsole();
     }
 
@@ -44,29 +50,31 @@ public class Merchant {
                 //This Mode is for getting the integer value of roman numeral variables
                 String [] romanArray = Arrays.copyOfRange(words, 3, length-1);
                 int result = RomanNumerals.romanToInteger(romanArray);
-                printStream.println(String.join(" ", romanArray) + " is " + result);
+                String message = String.join(" ", romanArray) + " is " + result;
+                logger.info(message);
             }
             else if(words[length-1].equals("?") && preWord.equals("how many Credits")){//Mode 4
                 //This Mode is for getting an integer value with both credit and roman variables involved
                 getCredits(words,length);
             } else { //error
-                printStream.println(failure);
+                logger.info(ERROR);
                 break;
             }
         }
 
     }
 
-    private static void getCredits(String[] words, int length) {
+    private void getCredits(String[] words, int length) {
         String creditKey = words[length-2];
         double creditVal = creditMap.get(creditKey); //get the credit variable's value
         String [] romanArray = Arrays.copyOfRange(words, 4, length-2);
         int romanInt = RomanNumerals.romanToInteger(romanArray); //get the roman numeral variables' value
         double result = romanInt * creditVal; //multiply them to get the result
-        printStream.println(String.join(" ", romanArray) + " " + creditKey + " is " + (int)result + " Credits");
+        String message = String.join(" ", romanArray) + " " + creditKey + " is " + (int)result + " Credits";
+        logger.info(message);
     }
 
-    private static void updateCreditMap(String[] words, int length) {
+    private void updateCreditMap(String[] words, int length) {
         int creditVal = Integer.parseInt(words[length-2]);//there should be an integer right before "Credits"
         String key = words[length-4];//This is the name of the credit variable
         //First part of string should be variables representing roman numerals

@@ -1,8 +1,13 @@
-// class for converting roman numerals to integers
+package main;
+
+
 import java.util.*;
 
-public class RomanNumerals {
+public class RomanNumerals {// class for converting roman numerals to integers
     //converts an array of roman numeral variables to an integer value
+
+    private RomanNumerals(){}
+
     public static int romanToInteger(String[] array){
         Map<Character,Integer> numbersMap = new HashMap<>();
         numbersMap.put('I',1);
