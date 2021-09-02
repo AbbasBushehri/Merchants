@@ -12,10 +12,10 @@ public class RomanNumerals {
         numbersMap.put('C',100);
         numbersMap.put('D',500);
         numbersMap.put('M',1000);
-        String roman = "";
+        StringBuilder roman = new StringBuilder();
 
-        for(int i = 0; i <array.length; i++){
-            roman += Merchant.romanMap.get(array[i]); //converting the roman variables to their values (ex: glob->V)
+        for (String s : array) {
+            roman.append(Merchant.romanMap.get(s)); //converting the roman variables to their values (ex: glob->V)
         }
 
         int result=0;

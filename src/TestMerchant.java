@@ -3,24 +3,26 @@ import org.junit.Test;
 
 import java.io.*;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class TestMerchant {
 
+    @SuppressWarnings("SpellCheckingInspection")
     @Test
     public void mainTest() {
 
         ByteArrayInputStream inputStream =
                 new ByteArrayInputStream(("glob is I" +
-                "\nprok is V" +
-                "\npish is X" +
-                "\ntegj is L" +
-                "\nglob glob Silver is 34 Credits" +
-                "\nglob prok Gold is 57800 Credits" +
-                "\npish pish Iron is 3910 Credits" +
-                "\nhow much is pish tegj glob glob ?" +
-                "\nhow many Credits is glob prok Silver ?" +
-                "\nhow many Credits is glob prok Gold ?" +
-                "\nhow many Credits is glob prok Iron ?" +
-                "\nHow much wood could a woodchuck chuck if a woodchuck could chuck wood ?").getBytes());
+                "\r\nprok is V" +
+                "\r\npish is X" +
+                "\r\ntegj is L" +
+                "\r\nglob glob Silver is 34 Credits" +
+                "\r\nglob prok Gold is 57800 Credits" +
+                "\r\npish pish Iron is 3910 Credits" +
+                "\r\nhow much is pish tegj glob glob ?" +
+                "\r\nhow many Credits is glob prok Silver ?" +
+                "\r\nhow many Credits is glob prok Gold ?" +
+                "\r\nhow many Credits is glob prok Iron ?" +
+                "\r\nHow much wood could a woodchuck chuck if a woodchuck could chuck wood ?").getBytes());
 
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(byteArrayOutputStream);

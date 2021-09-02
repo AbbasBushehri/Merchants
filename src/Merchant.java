@@ -3,32 +3,36 @@ import java.io.PrintStream;
 import java.util.*;
 
 public class Merchant {
-    static String[] numeralsArray = {"I", "V", "X", "L", "C", "D", "M"};
-    static List numeralsList = Arrays.asList(numeralsArray);
-    static HashMap<String, String> romanMap = new HashMap<>(); //variables that represent roman numerals
-    static HashMap<String, Double> creditMap = new HashMap<>();//variables that represent credit values
-    static String failure = "I have no idea what you are talking about"; //error message
+    static final String[] numeralsArray = {"I", "V", "X", "L", "C", "D", "M"};
+    static final List<String> numeralsList = Arrays.asList(numeralsArray);
+    static final HashMap<String, String> romanMap = new HashMap<>(); //variables that represent roman numerals
+    static final HashMap<String, Double> creditMap = new HashMap<>();//variables that represent credit values
+    static final String failure = "I have no idea what you are talking about"; //error message
 
     static private Scanner scanner;
     static private PrintStream printStream;
 
     public Merchant(InputStream inputStream, PrintStream printStream){
-        this.scanner = new Scanner(inputStream);
-        this.printStream = printStream;
+        scanner = new Scanner(inputStream);
+        Merchant.printStream = printStream;
     }
 
-    public static void main(String args[]){
+    public static void main(String[] args){
         Merchant merchant = new Merchant(System.in, System.out);
         merchant.merchantConsole();
     }
 
-
-    public static void merchantConsole()
+    public void merchantConsole()
     {
         while(true) {
             String input = scanner.nextLine(); //get input
             String[] words = input.split(" ");
             int length = words.length;
+
+            String preWord = ""; //string will make mode selection easier later on
+            if(length>=3){
+                preWord = words[0] + " " +  words[1] + " " + words[2];
+            }
 
             if(length==3 && words[1].equals("is") && numeralsList.contains(words[2])){//Mode 1, update roman map
                 romanMap.put(words[0], words[2]);
@@ -36,13 +40,13 @@ public class Merchant {
             else if(words[length-1].equals("Credits") && words[length-3].equals("is")){//Mode 2, update credit map
                 updateCreditMap(words, length);
             }
-            else if(words[length-1].equals("?") && words[0].equals("how") && words[1].equals("much")){//Mode 3
+            else if(words[length-1].equals("?") && preWord.equals("how much is")){//Mode 3
                 //This Mode is for getting the integer value of roman numeral variables
                 String [] romanArray = Arrays.copyOfRange(words, 3, length-1);
                 int result = RomanNumerals.romanToInteger(romanArray);
                 printStream.println(String.join(" ", romanArray) + " is " + result);
             }
-            else if(words[length-1].equals("?") && words[0].equals("how") && words[1].equals("many")){//Mode 4
+            else if(words[length-1].equals("?") && preWord.equals("how many Credits")){//Mode 4
                 //This Mode is for getting an integer value with both credit and roman variables involved
                 getCredits(words,length);
             } else { //error
