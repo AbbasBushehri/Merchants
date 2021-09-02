@@ -1,6 +1,6 @@
 # How to Run
-* The Merchant.java class in the "main" package contains the main method. Run it to run the program.
-* There is a test class in the "test" package as well.
+* The Merchant.java class in the "src/java/main" package contains the main method. Run it to run the program.
+* There is a test class in the "src/java/test" package as well.
 * This program contains a maven dependency, so make sure to download the pom.xml file as well.
 
 # Assumptions
